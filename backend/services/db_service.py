@@ -407,4 +407,7 @@ class DBService:
 
 
 # Global DB Instance
-db_service = DBService()
+import os
+mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+db_name = os.getenv("DB_NAME", "smartclass_ai")
+db_service = DBService(mongo_uri=mongo_uri, db_name=db_name)
