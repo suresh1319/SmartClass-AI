@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: smartclass-ai-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGO_URI
+        value: "" # Provide your MongoDB Atlas connection string here
+      - key: DB_NAME
+        value: smartclass_ai
+      - key: PYTHON_VERSION
+        value: 3.10.0
