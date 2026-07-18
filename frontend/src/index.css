@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@theme {
+  --color-brand-50: #eef8ff;
+  --color-brand-100: #d8eeff;
+  --color-brand-200: #b9e0ff;
+  --color-brand-300: #89ceff;
+  --color-brand-400: #52b3ff;
+  --color-brand-500: #2a93ff;
+  --color-brand-600: #1374f5;
+  --color-brand-700: #0d5ee1;
+  --color-brand-800: #114cb7;
+  --color-brand-900: #144290;
+  --color-brand-950: #112957;
+
+  --color-dark-50: #f6f6f7;
+  --color-dark-100: #ececed;
+  --color-dark-200: #d5d6d8;
+  --color-dark-300: #b0b2b8;
+  --color-dark-400: #838790;
+  --color-dark-500: #646973;
+  --color-dark-600: #50545e;
+  --color-dark-700: #41454e;
+  --color-dark-800: #1e2024;
+  --color-dark-900: #121316;
+  --color-dark-950: #0a0a0c;
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  body {
+    background-color: #0c0d0f;
+    color: #f3f4f6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+}
+
+/* Glassmorphism custom helpers */
+.glass-panel {
+  background: rgba(18, 19, 22, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(26, 27, 31, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(42, 147, 255, 0.25);
+  box-shadow: 0 12px 40px 0 rgba(42, 147, 255, 0.1);
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--color-brand-400), var(--color-brand-500), #818cf8);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0c0d0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2c33;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3c3f4a;
+}
+
+/* Face Scanner Animation */
+@keyframes scan-line {
+  0% { top: 4%; opacity: 0.3; }
+  50% { top: 94%; opacity: 1; }
+  100% { top: 4%; opacity: 0.3; }
+}
+
+.animate-scan-line {
+  animation: scan-line 3s ease-in-out infinite;
+}
+
