@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   User,
   Calendar,
@@ -7,30 +7,23 @@ import {
   BookOpen,
   TrendingUp,
   AlertTriangle,
-  Clock,
   CheckCircle2,
   XCircle,
-  Video,
-  VideoOff,
   Loader2,
   LogOut,
   RefreshCw,
   Zap,
-  ArrowRight,
   ShieldCheck,
   Percent
 } from 'lucide-react';
 import { 
   getStudentDashboard, 
-  markAttendanceByFace, 
-  type StudentDashboardData, 
-  type Assessment 
+  type StudentDashboardData 
 } from '../services/api';
 
 const StudentDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [rollNumber, setRollNumber] = useState<string | null>(null);
-  const [name, setName] = useState<string | null>(null);
   const [data, setData] = useState<StudentDashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,12 +32,10 @@ const StudentDashboard: React.FC = () => {
   // Authentication check
   useEffect(() => {
     const storedRoll = localStorage.getItem('studentRollNumber');
-    const storedName = localStorage.getItem('studentName');
     if (!storedRoll) {
       navigate('/student/login');
     } else {
       setRollNumber(storedRoll);
-      setName(storedName);
     }
   }, [navigate]);
 
@@ -93,32 +84,7 @@ const StudentDashboard: React.FC = () => {
     }
   };
 
-  const getAttendanceStatusConfig = (status: 'present' | 'absent' | 'weekend') => {
-    switch (status) {
-      case 'present':
-        return {
-          bg: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
-          indicator: 'bg-emerald-500 shadow-emerald-500/30',
-          label: 'Present',
-          icon: <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-        };
-      case 'absent':
-        return {
-          bg: 'bg-rose-500/10 border-rose-500/20 text-rose-400',
-          indicator: 'bg-rose-500 shadow-rose-500/30',
-          label: 'Absent',
-          icon: <XCircle className="w-3.5 h-3.5 text-rose-400" />
-        };
-      case 'weekend':
-      default:
-        return {
-          bg: 'bg-dark-800/40 border-white/5 text-gray-500',
-          indicator: 'bg-dark-600',
-          label: 'No Class',
-          icon: <span className="w-1.5 h-1.5 rounded-full bg-gray-600" />
-        };
-    }
-  };
+
 
   if (loading) {
     return (

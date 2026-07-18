@@ -19,7 +19,6 @@ import {
   VideoOff,
   RefreshCw,
   Trash2,
-  RotateCcw,
 } from 'lucide-react';
 import {
   markAttendanceByFace,
@@ -258,7 +257,7 @@ const Dashboard: React.FC = () => {
 
         for (const item of res.results) {
           scanIdRef.current += 1;
-          const isSuccess = item.success && item.student;
+          const isSuccess = !!(item.success && item.student);
           
           const result: ScanResult = {
             id: scanIdRef.current,
