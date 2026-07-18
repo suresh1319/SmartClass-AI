@@ -11,4 +11,18 @@ services:
       - key: DB_NAME
         value: smartclass_ai
       - key: PYTHON_VERSION
-        value: 3.10.0
+        value: 3.10.14
+
+  - type: web
+    name: smartclass-ai-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    headers:
+      - key: Cache-Control
+        value: public, max-age=31536000
+    envVars:
+      - key: VITE_API_URL
+        value: https://smartclass-ai.onrender.com
+
