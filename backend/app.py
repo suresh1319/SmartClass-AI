@@ -23,10 +23,21 @@ app = FastAPI(
 )
 
 # CORS configurations
-# Allow connections from Vite default dev server
+# Allow connections from localhost, local networks, and production domains
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://smart-class-ai-one.vercel.app",
+]
+
+# Allow additional origins from environment variables if set
+env_origins = os.getenv("ALLOWED_ORIGINS")
+if env_origins:
+    allowed_origins.extend([origin.strip() for origin in env_origins.split(",") if origin.strip()])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
